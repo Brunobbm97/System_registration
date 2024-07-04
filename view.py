@@ -12,7 +12,7 @@ def inserir_form(i):
         query = "INSERT INTO inventory(name, location, description, brand, purchase_date, prize, serie, image) VALUES(?,?,?, ?,?,?,?,?)"
         # execute precisa de onde/como vai ser inserido os dados e a lista que contenha os dados a serem inseridos
         cur.execute(query, i)
-####
+
 
 def update_form(i):
     # Atualizar dados
@@ -20,9 +20,8 @@ def update_form(i):
         cur = con.cursor()
         query = ("Update inventory SET name=?, location=?, description=?, brand=?, purchase_date=?, prize=?, serie=?, image=? "
                  "WHERE id=?")
-
         cur.execute(query, i)
-###
+
 
 def delete_form(i):
     # Deletar dados
@@ -45,7 +44,6 @@ def view_form():
             view_dados.append(row)
 
     return view_dados
-
 
 
 # View Individual data
