@@ -57,3 +57,5 @@ def view_individual_form(id):
         rows = cur.fetchall()
         for row in rows:
             view_dados_individual.append(row)
+
+    return view_dados_individual

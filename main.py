@@ -85,6 +85,33 @@ def inserir():
    
 # Função para escolher imagem
 
+
+
+# function to see image
+def view_image():
+    global imagem, imagem_string, l_imagem 
+
+    treev_dados = tree.focus()
+    treev_dicionario = tree.item(treev_dados)
+    treev_lista = treev_dicionario['values']
+
+    valor = [int(treev_lista[0])]
+
+    item = view_individual_form(valor)
+
+    imagem = item[0][8]
+
+    imagem = Image.open(imagem)
+    imagem = imagem.resize((170,170))
+    imagem = ImageTk.PhotoImage(imagem)
+
+    l_imagem = Label(frameMeio, image=imagem, bg=co1, fg=co4)
+    l_imagem.place(x=700, y=10)
+
+
+
+
+
 global imagem, imagem_string, l_imagem 
 
 def escolher_imagem():
@@ -100,8 +127,6 @@ def escolher_imagem():
     l_imagem = Label(frameMeio, image=imagem, bg=co1, fg=co4)
 
     l_imagem.place(x=700, y=10)
-
-
 
 
 # Trabalhando no frame cima---------------------------
@@ -177,7 +202,7 @@ img_update = Image.open('update.png')
 img_update = img_update.resize((20,20))
 img_update = ImageTk.PhotoImage(img_update)
 
-b_update = Button(frameMeio, image=img_update, width=95, text=' Update'.upper(), compound=LEFT, anchor=NW, overrelief=RIDGE, font=('Ivy 8'), bg=co1, fg=co0)
+b_update = Button(frameMeio, command=reload, image=img_update, width=95, text=' Update'.upper(), compound=LEFT, anchor=NW, overrelief=RIDGE, font=('Ivy 8'), bg=co1, fg=co0)
 b_update.place(x=330, y=50)
 
 # Deletar 
@@ -185,7 +210,7 @@ img_delete = Image.open('delete.png')
 img_delete = img_delete.resize((20,20))
 img_delete = ImageTk.PhotoImage(img_delete)
 
-b_delete = Button(frameMeio, image=img_delete, width=95, text=' Delete'.upper(), compound=LEFT, anchor=NW, overrelief=RIDGE, font=('Ivy 8'), bg=co1, fg=co0)
+b_delete = Button(frameMeio,command=delete, image=img_delete, width=95, text=' Delete'.upper(), compound=LEFT, anchor=NW, overrelief=RIDGE, font=('Ivy 8'), bg=co1, fg=co0)
 b_delete.place(x=330, y=90)
 
 # view Image
@@ -193,7 +218,7 @@ img_item = Image.open('view.png')
 img_item = img_item.resize((20,20))
 img_item = ImageTk.PhotoImage(img_item)
 
-b_item = Button(frameMeio, image=img_item, width=95, text=' See image'.upper(), compound=LEFT, anchor=NW, overrelief=RIDGE, font=('Ivy 8'), bg=co1, fg=co0)
+b_item = Button(frameMeio,command=view_image, image=img_item, width=95, text=' See image'.upper(), compound=LEFT, anchor=NW, overrelief=RIDGE, font=('Ivy 8'), bg=co1, fg=co0)
 b_item.place(x=330, y=221)
 
 # Labels quantidade total e Valores
@@ -211,6 +236,8 @@ l_qtd_.place(x=450, y=92)
 
 # Tabela
 def mostrar():
+    global tree
+
     tabela_head = ['#Item','Nome',  'Sala/Área','Descrição', 'Marca/Modelo', 'Data da compra','Valor da compra', 'Número de série']
     lista_itens = view_form()
 
