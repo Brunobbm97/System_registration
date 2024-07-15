@@ -109,6 +109,79 @@ def view_image():
     l_imagem.place(x=700, y=10)
 
 
+# Função atualizar
+def reload():
+    global imagem, imagem_string, l_imagem 
+    try:
+        treev_dados = tree.focus()
+        treev_dicionario = tree.item(treev_dados)
+        treev_lista = treev_dicionario['values']
+
+        valor = treev_lista[0]
+
+        e_name.delete(0, 'end')
+        e_local.delete(0, 'end')
+        e_description.delete(0, 'end')
+        e_brand.delete(0, 'end')
+        e_cal.delete(0, 'end')
+        e_valor.delete(0, 'end')
+        e_serie.delete(0, 'end')
+
+        id = int(treev_lista[0])
+        e_name.insert(0, treev_lista[1])
+        e_local.insert(0, treev_lista[2])
+        e_description.insert(0, treev_lista[3])
+        e_brand.insert(0, treev_lista[4])
+        e_cal.insert(0, treev_lista[5])
+        e_valor.insert(0, treev_lista[6])
+        e_serie.insert(0, treev_lista[7])
+        imagem_string = treev_lista[8]
+
+        
+        def update():
+            global imagem, imagem_string, l_imagem 
+
+            nome = e_name.get()
+            local = e_local.get()
+            description = e_description.get()
+            model = e_brand.get()
+            data = e_cal.get()
+            valor = e_valor.get()
+            serie = e_serie.get()
+            imagem = imagem_string
+
+            if imagem == '':
+                imagem = e_serie.insert(0, treev_lista[7])
+
+            lista_atualizar = [nome, local, description, model, data, valor, serie, imagem, id]
+
+            for i in lista_atualizar:
+                if i =='':
+                    messagebox.showerror("Error","Preencha todos os campos")
+                    return
+                
+            update_form(lista_atualizar)
+            messagebox.showinfo('Sucesso','Os dados foram atualizados com sucesso')
+
+            e_name.delete(0, 'end')
+            e_local.delete(0, 'end')
+            e_description.delete(0, 'end')
+            e_brand.delete(0, 'end')
+            e_cal.delete(0, 'end')
+            e_valor.delete(0, 'end')
+            e_serie.delete(0, 'end')
+
+            b_confirmar.destroy()
+
+            mostrar()
+
+        b_confirmar = Button(frameMeio, command=update, width=13, text=' confirmar'.upper(), overrelief=RIDGE, font=('Ivy 8 bold'), bg=co2, fg=co1)
+        b_confirmar.place(x=330, y=185)
+
+    except IndexError:
+        messagebox.showerror('Erro', 'Seleciona um dos dados na tabela')        
+
+
 
 
 
