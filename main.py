@@ -182,6 +182,22 @@ def reload():
         messagebox.showerror('Erro', 'Seleciona um dos dados na tabela')        
 
 
+# Delete Function
+def delete():
+    try:
+        treev_dados = tree.focus()
+        treev_dicionario = tree.item(treev_dados)
+        treev_lista = treev_dicionario['values']
+        valor = treev_lista[0]
+
+        delete_form([valor])
+
+        messagebox.showinfo('Sucesso','Os dados foram deletados com sucesso')
+
+        mostrar()
+
+    except IndexError:
+        messagebox.showerror('Erro', 'Seleciona um dos dados na tabela')        
 
 
 
